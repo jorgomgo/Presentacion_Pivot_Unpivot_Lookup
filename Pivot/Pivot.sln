@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Presentacion", "Pivot\Presentacion.dtproj", "{812E8F6D-C161-4B55-91E2-944CCF312DA2}"
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Pivot", "Pivot\Pivot.dtproj", "{812E8F6D-C161-4B55-91E2-944CCF312DA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
