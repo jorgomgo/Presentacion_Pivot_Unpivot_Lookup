@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Presentacion", "Pivot\Presentacion.dtproj", "{812E8F6D-C161-4B55-91E2-944CCF312DA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{812E8F6D-C161-4B55-91E2-944CCF312DA2}.Development|Default.ActiveCfg = Development
+		{812E8F6D-C161-4B55-91E2-944CCF312DA2}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33B71447-654E-4803-BDF3-7D95B1977E36}
+	EndGlobalSection
+EndGlobal

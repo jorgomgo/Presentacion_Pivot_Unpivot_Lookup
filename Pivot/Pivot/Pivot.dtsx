@@ -1,0 +1,756 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/13/2018 4:07:48 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ZIRAEL-PC"
+  DTS:CreatorName="ZIRAEL-PC\Zirael"
+  DTS:DTSID="{80CF55B0-3BF9-4B19-9C85-86E81F51742F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.106"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Pivot"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{F1E2D0AF-3491-4884-9784-183FEF287C8D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.Presentacion]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8926F342-D775-4A6C-86E8-B34B1D370B37}"
+      DTS:ObjectName="LocalHost.Presentacion">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Presentacion;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Pivot"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2DDE78BE-6966-4429-89EA-8185C4490201}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Pivot"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Pivot\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[PivotDestination]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">if (OBJECT_ID ('PivotDestination') is not null)
+drop table PivotDestination
+CREATE TABLE [PivotDestination] (
+    [Month] nvarchar(50),
+    [Saturday] int,
+    [Friday] int,
+    [Thursday] int,
+    [Wednesday] int,
+    [Tuesday] int,
+    [Monday] int,
+    [Sunday] int
+)</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Pivot\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Presentacion]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Presentacion]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Month]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Month"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Month]" />
+                    <inputColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Saturday]"
+                      cachedDataType="i4"
+                      cachedName="Saturday"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Saturday]"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Saturday]" />
+                    <inputColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Friday]"
+                      cachedDataType="i4"
+                      cachedName="Friday"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Friday]"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Friday]" />
+                    <inputColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Thursday]"
+                      cachedDataType="i4"
+                      cachedName="Thursday"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Thursday]"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Thursday]" />
+                    <inputColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Wednesday]"
+                      cachedDataType="i4"
+                      cachedName="Wednesday"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Wednesday]"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Wednesday]" />
+                    <inputColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Tuesday]"
+                      cachedDataType="i4"
+                      cachedName="Tuesday"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tuesday]"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Tuesday]" />
+                    <inputColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Monday]"
+                      cachedDataType="i4"
+                      cachedName="Monday"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Monday]"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Monday]" />
+                    <inputColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Sunday]"
+                      cachedDataType="i4"
+                      cachedName="Sunday"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sunday]"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Sunday]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                      dataType="wstr"
+                      length="50"
+                      name="Month" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Saturday]"
+                      dataType="i4"
+                      name="Saturday" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Friday]"
+                      dataType="i4"
+                      name="Friday" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Thursday]"
+                      dataType="i4"
+                      name="Thursday" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Wednesday]"
+                      dataType="i4"
+                      name="Wednesday" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tuesday]"
+                      dataType="i4"
+                      name="Tuesday" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Monday]"
+                      dataType="i4"
+                      name="Monday" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sunday]"
+                      dataType="i4"
+                      name="Sunday" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[PivotOrigin]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Pivot\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Presentacion]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Presentacion]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Month]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Month]"
+                      length="50"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Month]"
+                      name="Month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[DayOfWeek]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DayOfWeek]"
+                      length="50"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[DayOfWeek]"
+                      name="DayOfWeek"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Expenses]"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]"
+                      name="Expenses"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Month]"
+                      dataType="wstr"
+                      length="50"
+                      name="Month" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DayOfWeek]"
+                      dataType="wstr"
+                      length="50"
+                      name="DayOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Expenses]"
+                      dataType="i4"
+                      name="Expenses" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Month]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Month]"
+                      name="Month" />
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DayOfWeek]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DayOfWeek]"
+                      name="DayOfWeek" />
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Expenses]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Expenses]"
+                      name="Expenses" />
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Pivot\Pivot"
+              componentClassID="Microsoft.Pivot"
+              contactInfo="Pivot;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Compacts an input data flow by pivoting it on a column value, making it less normalized. The input data should be sorted by the pivot column because a pivot happens each time data in the pivot column changes. Note: duplicate rows will cause this transformation to fail."
+              name="Pivot"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Causes the Pivot Transform to ignore rows containing unrecognized values in the Pivot Key column and to report the complete list of unmatched values at the end of DataFlow execution. Useful for collecting a list of values from input rows that can be used to automatically generate output columns."
+                  name="PassThroughUnmatchedPivotKeys">false</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Pivot\Pivot.Inputs[Pivot Default Input]"
+                  hasSideEffects="true"
+                  name="Pivot Default Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Pivot\Pivot.Inputs[Pivot Default Input].Columns[DayOfWeek]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="DayOfWeek"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[DayOfWeek]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot\Pivot.Inputs[Pivot Default Input].Columns[Month]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Month"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Month]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Pivot\Pivot.Inputs[Pivot Default Input].Columns[Expenses]"
+                      cachedDataType="i4"
+                      cachedName="Expenses"
+                      lineageId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">3</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Pivot\Pivot.Outputs[Pivot Default Output]"
+                  name="Pivot Default Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Month]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Month]"
+                      name="Month">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Month]}</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue" />
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Saturday]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Saturday]"
+                      name="Saturday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Saturday</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Friday]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Friday]"
+                      name="Friday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Friday</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Thursday]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Thursday]"
+                      name="Thursday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Thursday</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Wednesday]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Wednesday]"
+                      name="Wednesday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Wednesday</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Tuesday]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Tuesday]"
+                      name="Tuesday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Tuesday</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Monday]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Monday]"
+                      name="Monday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Monday</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Sunday]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Default Output].Columns[Sunday]"
+                      name="Sunday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output].Columns[Expenses]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">Sunday</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Pivot\Pivot.Outputs[Pivot Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Pivot Error Output"
+                  synchronousInputId="Package\Pivot\Pivot.Inputs[Pivot Default Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Pivot\Pivot.Outputs[Pivot Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Pivot\Pivot.Outputs[Pivot Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Pivot.Paths[OLE DB Source Output]"
+              endId="Package\Pivot\Pivot.Inputs[Pivot Default Input]"
+              name="OLE DB Source Output"
+              startId="Package\Pivot\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Pivot.Paths[Pivot Default Output]"
+              endId="Package\Pivot\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Pivot Default Output"
+              startId="Package\Pivot\Pivot.Outputs[Pivot Default Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="101.6,41.6"
+          Id="Package\Pivot"
+          TopLeft="183.428574552341,46.4941182991213" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Pivot">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="101.6,41.6"
+          Id="Package\Pivot\Pivot"
+          TopLeft="240.571432668336,169.458825906008" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Pivot\OLE DB Destination"
+          TopLeft="206.285717798739,270.400003792258" />
+        <EdgeLayout
+          Id="Package\Pivot.Paths[Pivot Default Output]"
+          TopLeft="291.428575233537,211.058825906008">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.3411778862501"
+              Start="0,0"
+              End="0,51.8411778862501">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.8411778862501" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Pivot\OLE DB Source"
+          TopLeft="222.857146652377,70.352942163144" />
+        <EdgeLayout
+          Id="Package\Pivot.Paths[OLE DB Source Output]"
+          TopLeft="294.514289660357,111.952942163144">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.5058837428638"
+              Start="0,0"
+              End="0,50.0058837428638">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.0058837428638" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Pivot\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Pivot\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
